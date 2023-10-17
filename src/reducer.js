@@ -1,23 +1,30 @@
-import * as actions from './action'
+import { INCREMENT,DECREMENT, CREATE_BUG } from "./action";
 
 let lastId=0;
 
-export default function reducer (state=[], action) {
+const initialState = {
+    bugs:[{id: 0, description: "", resolved: false}],
+    count: 0
+}
+
+export default function reducer (state=initialState, action) {
     switch(action.type){
-        case actions.CREATE_BUG:{
-            return[
-                ...state,
-                {
+        case INCREMENT: {
+            return{ count: state.count+1};
+        }
+        case DECREMENT: {
+            return{ count: state.count-1};
+        }
+        case CREATE_BUG: [
+            ...state,
+          {
+                
                 id: ++lastId,
                 description: action.payload.description,
-                resolved:false
-                }
-
-            ]
-        }
-        case actions.RESOLVE_BUG:{
-           return state.map(bug=> bug.id !== action.payload.id ? bug : {...bug, resolved: true})
-        }
+                resolved: false
+            }
+          
+        ]
         default: 
         return state;
     }

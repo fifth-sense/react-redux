@@ -13,3 +13,11 @@ export const resolveBug = id => ({
        id // shorthand property for id=id
     }
 });
+
+export const increment =() => ({
+    type: actions.INCREMENT
+});
+
+export const decrement = () => ({
+    type: actions.DECREMENT
+})
